@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+:root {
+    --color-principal: #2D3161;
+    --color-secundario: #20C997;
+    --color-fondo: #E8ECEF;
+    --color-fondo-secundario: #FFFFFF;
+    --color-texto: #212529;
+}
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
+.btn-custom-primary {
+    background-color: var(--color-principal);
+    color: white;
+    border: none;
+}
+
+.btn-custom-primary:hover,
+.btn-custom-primary:active {
+    background-color: #1c1e3d !important;
+    color: white !important;
+}
+
+.btn-custom-secondary {
+    background-color: var(--color-secundario);
+    color: white;
+    border: none;
+}
+
+.btn-custom-secondary:hover,
+.btn-custom-secondary:active {
+    background-color: #18a078 !important;
+    color: white !important;
+}
+
+.bg-sanmarcos {
+    background-color: var(--color-principal) !important;
+}
+
+.text-sanmarcos {
+    color: var(--color-secundario) !important;
+}
+
+.nav-link {
+    font-weight: 700 !important;
+}
+
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+}
