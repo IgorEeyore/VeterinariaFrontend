@@ -66,7 +66,7 @@ function validarLogin() {
     }
 
     if (email === "admin@demo.cl" && password === "1234") {
-        window.location.href = "../paginaPrincipal.html";
+        window.location.href = "admin.html";
     } else if (email === "usuario@demo.cl" && password === "5678") {
         window.location.href = "../paginaPrincipal.html";
     } else {
