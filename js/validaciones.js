@@ -159,3 +159,40 @@ function validarRegistro() {
     alert("Registro exitoso. Ahora puedes iniciar sesión.");
     window.location.href = "login.html";
 }
+
+function validarContacto() {
+    let nombre = document.getElementById("contactoNombre").value;
+    let email = document.getElementById("contactoEmail").value;
+    let mensaje = document.getElementById("contactoMensaje").value;
+
+    if (nombre === "" || email === "" || mensaje === "") {
+        alert("Debe completar todos los campos del formulario");
+        return;
+    }
+
+    if (nombre.length > 100) {
+        alert("El nombre no puede superar los 100 caracteres");
+        return;
+    }
+
+    if (email.length > 100) {
+        alert("El correo no puede superar los 100 caracteres");
+        return;
+    }
+
+    let formatoCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formatoCorreo.test(email)) {
+        alert("Ingrese un correo válido");
+        return;
+    }
+
+    if (mensaje.length > 500) {
+        alert("El mensaje no puede superar los 500 caracteres");
+        return;
+    }
+
+    alert("¡Mensaje enviado con éxito! Nos contactaremos contigo pronto.");
+    document.getElementById("contactoNombre").value = "";
+    document.getElementById("contactoEmail").value = "";
+    document.getElementById("contactoMensaje").value = "";
+}
