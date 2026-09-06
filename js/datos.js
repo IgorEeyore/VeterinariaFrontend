@@ -27,3 +27,30 @@ let datosRegiones = [
         comunas: ["Punta Arenas", "Puerto Natales", "Porvenir", "Puerto Williams"]
     }
 ];
+let serviciosVeterinaria = [
+    {
+        id: 1,
+        nombre: 'Consulta General',
+        precio: 15000,
+        imagen: '../img/consulta1.jpg',
+        descripcionCorta: 'Revisión física completa para tu mascota.',
+        descripcionLarga: 'La consulta general incluye una revisión exhaustiva de los signos vitales, peso, temperatura, revisión dental, ocular y de oídos.'
+    },
+    {
+        id: 2,
+        nombre: 'Vacunación Anual',
+        precio: 25000,
+        imagen: '../img/vacuna2.jpg',
+        descripcionCorta: 'Esquema de vacunación preventiva.',
+        descripcionLarga: 'Protege a tu mascota contra las enfermedades más comunes y peligrosas. Incluye la vacuna Óctuple o Triple Felina.'
+    },
+    {
+        id: 3,
+        nombre: 'Peluquería Canina/Felina',
+        precio: 18000,
+        imagen: '../img/peinado.jpg',
+        descripcionCorta: 'Baño, corte de pelo y uñas.',
+        descripcionLarga: 'Servicio estético completo. Incluye baño con shampoo hipoalergénico, limpieza de glándulas anales y corte.'
+    }
+];
+
