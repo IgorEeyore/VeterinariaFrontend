@@ -32,7 +32,154 @@
         </nav>
     </header>
 
-    <main>
+    <main class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="fw-bold text-sanmarcos">Novedades y Consejos Peludos</h1>
+                <p class="text-muted fs-5">Mantente informado sobre el cuidado, salud y curiosidades de tus mascotas.</p>
+            </div>
+
+            <div class="row g-4">
+                
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="../img/vacuna1.jpg" class="card-img-top" alt="Vacunación" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">Importancia de la Vacunación Anual</h5>
+                            <p class="card-text text-muted">Las vacunas previenen enfermedades mortales. Descubre qué esquema necesita tu perro o gato este año.</p>
+                            <button type="button" class="btn btn-custom-secondary mt-auto" data-bs-toggle="modal" data-bs-target="#modalNoticia1">
+                                Leer artículo completo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="../img/uñas.jpg" class="card-img-top" alt="Peluquería canina" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">Beneficios del Baño y Corte Mensual</h5>
+                            <p class="card-text text-muted">No es solo estética, mantener el pelaje limpio evita problemas en la piel y parásitos.</p>
+                            <button type="button" class="btn btn-custom-secondary mt-auto" data-bs-toggle="modal" data-bs-target="#modalNoticia2">
+                                Leer artículo completo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="../img/mayor.jpg" class="card-img-top" alt="Control preventivo" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">Chequeo Geriátrico para Mascotas Mayores</h5>
+                            <p class="card-text text-muted">Si tu mascota tiene más de 7 años, los controles preventivos cada 6 meses son vitales.</p>
+                            <button type="button" class="btn btn-custom-secondary mt-auto" data-bs-toggle="modal" data-bs-target="#modalNoticia3">
+                                Leer artículo completo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-5 pt-5 border-top">
+                <h2 class="fw-bold text-sanmarcos mb-4 text-center">Preguntas Frecuentes sobre Cuidado Animal</h2>
+                <div class="accordion shadow-sm" id="faqVeterinaria">
+                    
+                    <div class="accordion-item border-0 border-bottom">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                ¿Cada cuánto tiempo debo desparasitar a mi mascota?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqVeterinaria">
+                            <div class="accordion-body text-muted">
+                                La desparasitación interna debe realizarse cada 3 a 4 meses, dependiendo del estilo de vida de tu mascota y si tiene acceso a parques o convive con otros animales. La desparasitación externa (pulgas y garrapatas) debe aplicarse según las indicaciones del producto (generalmente cada 1 a 3 meses).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-0 border-bottom">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                ¿Cuáles son los alimentos humanos más tóxicos para perros y gatos?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqVeterinaria">
+                            <div class="accordion-body text-muted">
+                                Bajo ninguna circunstancia debes darle a tu mascota chocolate, cebolla, ajo, uvas, pasas o palta (aguacate). Estos alimentos contienen compuestos que su hígado no puede metabolizar, pudiendo causar fallas renales severas, anemia o problemas cardíacos graves.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-0">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                ¿A qué edad es recomendable esterilizar a mi mascota?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqVeterinaria">
+                            <div class="accordion-body text-muted">
+                                Por norma general, se aconseja la esterilización alrededor de los 6 meses de edad (antes del primer celo en las hembras). Esto reduce en un 90% el riesgo de desarrollar tumores mamarios o infecciones uterinas, y en machos previene problemas de próstata y conductas de marcaje territorial.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal fade" id="modalNoticia1" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg">
+                    <div class="modal-header bg-sanmarcos text-white border-0">
+                        <h5 class="modal-title fw-bold">Importancia de la Vacunación Anual</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <img src="../img/vacuna1.jpg" class="img-fluid rounded mb-4 w-100 shadow-sm" style="max-height: 350px; object-fit: cover;" alt="Vacunación">
+                        <p>Las vacunas son fundamentales para el sistema inmunológico de nuestras mascotas. Al igual que en los humanos, las vacunas introducen un antígeno inactivo que le enseña al cuerpo cómo defenderse en caso de entrar en contacto con el virus real.</p>
+                        <p>En el caso de los perros, la vacuna <strong>Séxtuple</strong> u <strong>Óctuple</strong> previene el Distemper, Parvovirus, Hepatitis, Leptospirosis, entre otras. Estas enfermedades son altamente contagiosas y pueden ser fatales si no se previenen.</p>
+                        <p>Para los gatos, la vacuna <strong>Triple Felina</strong> protege contra la Panleucopenia, Rinotraqueítis y Calicivirus. ¡No olvides visitar a tu veterinario anualmente para mantener su carnet al día!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalNoticia2" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg">
+                    <div class="modal-header bg-sanmarcos text-white border-0">
+                        <h5 class="modal-title fw-bold">Beneficios del Baño y Corte Mensual</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <img src="../img/uñas.jpg" class="img-fluid rounded mb-4 w-100 shadow-sm" style="max-height: 350px; object-fit: cover;" alt="Corte de uñas">
+                        <p>Llevar a tu perro a la peluquería mensualmente va mucho más allá de un tema estético. Un pelaje mal cuidado, especialmente en razas de pelo largo, puede generar nudos apretados que tiran de la piel, causando dolor e infecciones crónicas.</p>
+                        <p>Además, durante el proceso de peluquería, los profesionales realizan un examen táctil de toda la piel, lo que permite descubrir bultos, alergias, garrapatas o pulgas que a simple vista pasan desapercibidos.</p>
+                        <p>El corte de uñas también es esencial. Si las uñas crecen demasiado, alteran la forma en que tu mascota pisa, pudiendo generar problemas ortopédicos a largo plazo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalNoticia3" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg">
+                    <div class="modal-header bg-sanmarcos text-white border-0">
+                        <h5 class="modal-title fw-bold">Chequeo Geriátrico para Mascotas Mayores</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <img src="../img/mayor.jpg" class="img-fluid rounded mb-4 w-100 shadow-sm" style="max-height: 350px; object-fit: cover;" alt="Control preventivo">
+                        <p>El tiempo pasa mucho más rápido para nuestros fieles amigos. Un perro o gato que supera los 7 años de edad ya es considerado un paciente geriátrico o "senior". En esta etapa, el metabolismo cambia y ciertos órganos empiezan a trabajar con mayor lentitud.</p>
+                        <p>En Veterinaria San Marcos recomendamos realizar un <strong>Chequeo Preventivo Senior</strong> cada 6 meses. Este incluye exámenes de sangre para evaluar la función de los riñones y el hígado, además de radiografías para detectar artritis a tiempo.</p>
+                        <p>La detección temprana de enfermedades renales o problemas cardíacos mejora drásticamente la esperanza y calidad de vida de tu mascota en sus años dorados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="bg-sanmarcos text-white pt-5 pb-4 mt-5">
