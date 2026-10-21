@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,6 +35,41 @@
             </table>
         </div>
     </main>
+
+    <div class="modal fade" id="modalCatalogo" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background-color: #2b3060;">
+                    <h5 class="modal-title fw-bold" id="modalTituloCatalogo">Agregar Nuevo Servicio</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formCatalogo" novalidate onsubmit="guardarCatalogo(event)">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Nombre del Servicio / Producto</label>
+                            <input type="text" class="form-control" id="catalogoNombre">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Categoría</label>
+                            <select class="form-select" id="catalogoCategoria">
+                                <option value="Servicio">Servicio</option>
+                                <option value="Producto">Producto</option>
+                                <option value="Medicamento">Medicamento</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Precio ($ CLP)</label>
+                            <input type="number" class="form-control" id="catalogoPrecio" min="0" placeholder="Ej: 15000">
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn text-white" style="background-color: #2ec4b6;">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="text-white pt-4 pb-3 mt-auto" style="background-color: #2b3060;">
         <div class="container text-center">
