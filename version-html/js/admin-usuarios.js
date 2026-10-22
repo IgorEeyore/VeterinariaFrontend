@@ -1,7 +1,28 @@
-﻿let usuariosAdmin = JSON.parse(localStorage.getItem("usuariosSanMarcos")) || [
-    { id: 1, nombre: "Matías Figueroa", correo: "m.figueroav@duocuc.cl", rol: "Admin" },
-    { id: 2, nombre: "Cliente Ejemplo", correo: "cliente@correo.cl", rol: "Cliente" }
-];
+let usuariosAdmin = JSON.parse(localStorage.getItem("usuariosSanMarcos"));
+if (!usuariosAdmin || usuariosAdmin.length === 0) {
+    usuariosAdmin = [
+        { id: 1, nombre: "Admin", correo: "admin@demo.cl", rol: "Admin" },
+        { id: 2, nombre: "Cliente Ejemplo", correo: "cliente@correo.cl", rol: "Cliente" }
+    ];
+    localStorage.setItem("usuariosSanMarcos", JSON.stringify(usuariosAdmin));
+} else {
+    let tieneAdmin = false;
+    for (let i = 0; i < usuariosAdmin.length; i++) {
+        if (usuariosAdmin[i].rol === "Admin") {
+            tieneAdmin = true;
+            if (usuariosAdmin[i].correo === "m.figueroav@duocuc.cl") {
+                usuariosAdmin[i].nombre = "Admin";
+                usuariosAdmin[i].correo = "admin@demo.cl";
+                localStorage.setItem("usuariosSanMarcos", JSON.stringify(usuariosAdmin));
+            }
+            break;
+        }
+    }
+    if (!tieneAdmin) {
+        usuariosAdmin.unshift({ id: 1, nombre: "Admin", correo: "admin@demo.cl", rol: "Admin" });
+        localStorage.setItem("usuariosSanMarcos", JSON.stringify(usuariosAdmin));
+    }
+}
 let idEditando = null;
 
 function renderizarUsuarios() {
@@ -10,10 +31,13 @@ function renderizarUsuarios() {
     
     for (let i = 0; i < usuariosAdmin.length; i++) {
         let badgeRol = "";
+        let botonEliminar = "";
         if (usuariosAdmin[i].rol === "Admin") {
             badgeRol = '<span class="badge" style="background-color: #2b3060;">Admin</span>';
+            botonEliminar = '<button class="btn btn-sm btn-outline-danger" disabled title="No se puede eliminar al Administrador">Eliminar</button>';
         } else {
             badgeRol = '<span class="badge bg-secondary">Cliente</span>';
+            botonEliminar = `<button class="btn btn-sm btn-outline-danger" onclick="eliminarUsuario(${i})">Eliminar</button>`;
         }
         
         tabla.innerHTML += `
@@ -24,7 +48,7 @@ function renderizarUsuarios() {
                 <td>${badgeRol}</td>
                 <td class="text-center">
                     <button class="btn btn-sm btn-outline-secondary me-1" onclick="abrirEditarUsuario(${usuariosAdmin[i].id})">Editar</button>
-                    <button class="btn btn-sm btn-outline-danger" onclick="eliminarUsuario(${i})">Eliminar</button>
+                    ${botonEliminar}
                 </td>
             </tr>
         `;
@@ -66,6 +90,10 @@ function abrirEditarUsuario(idBuscado) {
 }
 
 function eliminarUsuario(indice) {
+    if (usuariosAdmin[indice].rol === "Admin") {
+        alert("El usuario Administrador no se puede eliminar porque siempre debe haber un administrador.");
+        return;
+    }
     if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
         usuariosAdmin.splice(indice, 1);
         localStorage.setItem("usuariosSanMarcos", JSON.stringify(usuariosAdmin));
@@ -76,12 +104,11 @@ function eliminarUsuario(indice) {
 function guardarUsuario(event) {
     event.preventDefault();
     
-    let nombre = document.getElementById("usuarioNombre").value;
-    let correo = document.getElementById("usuarioCorreo").value;
+    let nombre = document.getElementById("usuarioNombre").value.trim();
+    let correo = document.getElementById("usuarioCorreo").value.trim();
     let password = document.getElementById("usuarioPassword").value;
-    let rol = document.getElementById("usuarioRol").value;
     
-    if (nombre === "" || correo === "" || rol === "") {
+    if (nombre === "" || correo === "") {
         alert("Debe completar todos los campos obligatorios.");
         return;
     }
@@ -107,7 +134,6 @@ function guardarUsuario(event) {
             if (usuariosAdmin[i].id === idEditando) {
                 usuariosAdmin[i].nombre = nombre;
                 usuariosAdmin[i].correo = correo;
-                usuariosAdmin[i].rol = rol;
                 break;
             }
         }
@@ -122,7 +148,7 @@ function guardarUsuario(event) {
             id: nuevoId,
             nombre: nombre,
             correo: correo,
-            rol: rol
+            rol: "Cliente"
         };
         usuariosAdmin.push(nuevoUsuario);
         alert("Usuario creado con éxito.");
