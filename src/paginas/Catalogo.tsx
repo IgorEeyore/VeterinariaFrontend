@@ -44,7 +44,7 @@ function Catalogo() {
             <input
               type="text"
               className="form-control"
-              placeholder="Ej: Consulta, Vacuna, Peluquería..."
+              placeholder="Ej: Consulta, Vacuna, Peluqueria..."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
             />

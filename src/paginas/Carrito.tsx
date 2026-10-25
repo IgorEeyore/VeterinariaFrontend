@@ -28,6 +28,12 @@ function Carrito() {
     }
   }
 
+  const procesarPago = () => {
+    alert("¡Compra realizada con exito! Nos comunicaremos contigo para coordinar tu atencion.")
+    setCarrito([])
+    localStorage.removeItem("carritoSanMarcos")
+  }
+
   const total = carrito.reduce((acc, item) => acc + item.precio, 0)
 
   return (
@@ -38,7 +44,7 @@ function Carrito() {
 
       {carrito.length === 0 ? (
         <div className="card shadow-sm border-0 p-5 text-center rounded-4">
-          <p className="fs-4 text-muted mb-3">Tu carrito está vacio</p>
+          <p className="fs-4 text-muted mb-3">Tu carrito esta vacio</p>
           <p className="text-secondary mb-4">
             Aun no has agregado servicios o productos a tu compra.
           </p>
@@ -141,11 +147,7 @@ function Carrito() {
                 type="button"
                 className="btn text-white fw-bold w-100 py-2 mb-2"
                 style={{ backgroundColor: "#2ec4b6" }}
-                onClick={() =>
-                  alert(
-                    "¡Compra realizada con exito! Nos comunicaremos contigo."
-                  )
-                }
+                onClick={procesarPago}
               >
                 Pagar Ahora
               </button>

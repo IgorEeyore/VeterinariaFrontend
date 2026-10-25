@@ -14,7 +14,7 @@ import Registro from "./paginas/Registro"
 import Carrito from "./paginas/Carrito"
 import Admin from "./paginas/Admin"
 import AdminCatalogo from "./paginas/Admin-Catalogo"
-import AdminUsuarios from "./paginas/Admin-Usuarios";
+import AdminUsuarios from "./paginas/Admin-Usuarios"
 
 import "./App.css"
 
