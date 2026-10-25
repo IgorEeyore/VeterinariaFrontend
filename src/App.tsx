@@ -7,6 +7,7 @@ import Footer from "./componentes/organismos/Footer";
 import Inicio from "./paginas/Inicio";
 import Nosotros from "./paginas/Nosotros";
 import Catalogo from "./paginas/Catalogo";
+import DetalleServicio from "./paginas/DetalleServicio";
 import Novedades from "./paginas/Novedades";
 import Contacto from "./paginas/Contacto";
 import Login from "./paginas/login";
@@ -32,6 +33,7 @@ function App() {
             <Route path="/" element={<Inicio />} />
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/catalogo" element={<Catalogo />} />
+            <Route path="/catalogo/:id" element={<DetalleServicio />} />
             <Route path="/novedades" element={<Novedades />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/login" element={<Login />} />
@@ -43,7 +45,6 @@ function App() {
           </Routes>
         </main>
 
-        {/* Pie de página */}
         <Footer />
 
       </div>
