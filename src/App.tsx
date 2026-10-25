@@ -24,7 +24,7 @@ function App() {
       <div className="app-layout">
 
         {/* Barra de navegación */}
-        <Navbar />
+        <Navbar esAdmin={true} />
 
         {/* Páginas */}
         <main className="app-contenido">
