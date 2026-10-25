@@ -63,11 +63,6 @@ function AdminCatalogo() {
     setServicios(lista);
   }
 
-  function actualizarHistorial(lista: ServicioEliminado[]) {
-    localStorage.setItem(CLAVE_HISTORIAL, JSON.stringify(lista));
-    setHistorial(lista);
-  }
-
   function limpiarFormulario() {
     setNombre("");
     setPrecio("");
