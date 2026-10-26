@@ -37,8 +37,8 @@ function FormularioLogin() {
       return
     }
 
-    if (contrasena.length !== 4) {
-      setError("La contrasena debe tener exactamente 4 caracteres")
+    if (contrasena.length < 4 || contrasena.length > 10) {
+      setError("La contrasena debe tener entre 4 y 10 caracteres")
       return
     }
 
@@ -124,8 +124,8 @@ function FormularioLogin() {
                 tipo="password"
                 nombre="contrasena"
                 valor={contrasena}
-                placeholder="Ingresa tu contrasena (4 caracteres)"
-                alCambiar={setContrasena}
+                placeholder="Ingresa tu contrasena (entre 4 y 10 caracteres)"
+                alCambiar={(val) => setContrasena(val.slice(0, 10))}
               />
 
               <button

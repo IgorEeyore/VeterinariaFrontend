@@ -11,6 +11,7 @@ import Novedades from "./paginas/Novedades"
 import Contacto from "./paginas/Contacto"
 import Login from "./paginas/login"
 import Registro from "./paginas/Registro"
+import AgendarCita from "./paginas/AgendarCita"
 import Carrito from "./paginas/Carrito"
 import Admin from "./paginas/Admin"
 import AdminCatalogo from "./paginas/Admin-Catalogo"
@@ -32,6 +33,7 @@ function App() {
             <Route path="/catalogo/:id" element={<DetalleServicio />} />
             <Route path="/novedades" element={<Novedades />} />
             <Route path="/contacto" element={<Contacto />} />
+            <Route path="/agendar" element={<AgendarCita />} />
             <Route path="/login" element={<Login />} />
             <Route path="/registro" element={<Registro />} />
             <Route path="/carrito" element={<Carrito />} />
