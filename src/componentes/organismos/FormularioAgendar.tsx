@@ -93,6 +93,7 @@ function FormularioAgendar() {
                     nombre="nombreDueno"
                     valor={nombreDueno}
                     placeholder="Ej: Carolina Munoz"
+                    obligatorio={true}
                     alCambiar={setNombreDueno}
                   />
                 </div>
@@ -103,6 +104,7 @@ function FormularioAgendar() {
                     nombre="telefono"
                     valor={telefono}
                     placeholder="Ej: +56 9 1234 5678"
+                    obligatorio={true}
                     alCambiar={setTelefono}
                   />
                 </div>
@@ -116,11 +118,14 @@ function FormularioAgendar() {
                     nombre="nombreMascota"
                     valor={nombreMascota}
                     placeholder="Ej: Rocky"
+                    obligatorio={true}
                     alCambiar={setNombreMascota}
                   />
                 </div>
                 <div className="col-12 col-md-6 mb-3">
-                  <label className="form-label fw-semibold">Tipo de Mascota</label>
+                  <label className="form-label fw-semibold">
+                    Tipo de Mascota <span className="text-danger">(*)</span>
+                  </label>
                   <select
                     className="form-select"
                     value={tipoMascota}
@@ -134,7 +139,9 @@ function FormularioAgendar() {
               </div>
 
               <div className="mb-3">
-                <label className="form-label fw-semibold">Servicio Requerido</label>
+                <label className="form-label fw-semibold">
+                  Servicio Requerido <span className="text-danger">(*)</span>
+                </label>
                 <select
                   className="form-select"
                   value={servicio}
@@ -156,6 +163,7 @@ function FormularioAgendar() {
                     tipo="date"
                     nombre="fecha"
                     valor={fecha}
+                    obligatorio={true}
                     alCambiar={setFecha}
                   />
                 </div>
@@ -165,6 +173,7 @@ function FormularioAgendar() {
                     tipo="time"
                     nombre="hora"
                     valor={hora}
+                    obligatorio={true}
                     alCambiar={setHora}
                   />
                 </div>
