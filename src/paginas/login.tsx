@@ -1,10 +1,11 @@
+import FormularioLogin from "../componentes/organismos/FormularioLogin"
+
 function Login() {
   return (
-    <div className="container mt-5">
-      <h1>Iniciar sesión</h1>
-      <p>Ingresa a tu cuenta de Veterinaria San Marcos.</p>
+    <div className="container py-5">
+      <FormularioLogin />
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login
