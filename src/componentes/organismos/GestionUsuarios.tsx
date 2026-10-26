@@ -101,10 +101,7 @@ function GestionUsuarios() {
   }
 
   const eliminarUsuario = (usuario: Usuario) => {
-    if (usuario.rol === "Admin") {
-      alert("El usuario Administrador no se puede eliminar porque siempre debe haber un admin.")
-      return
-    }
+    if (usuario.rol === "Admin") return
 
     if (window.confirm(`Estas seguro de eliminar al usuario ${usuario.nombre}?`)) {
       const filtrados = usuarios.filter((u) => u.id !== usuario.id)
@@ -113,11 +110,20 @@ function GestionUsuarios() {
   }
 
   return (
-    <div>
-      <div className="d-flex justify-content-end mb-4">
+    <div className="container py-4">
+      <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <div>
+          <a href="/admin" className="text-decoration-none text-muted small">
+            ← Volver al Panel
+          </a>
+          <h2 className="fw-bold mb-0" style={{ color: "#2D3161" }}>
+            Gestion de Usuarios
+          </h2>
+        </div>
+
         <button
           type="button"
-          className="btn text-white fw-bold px-4"
+          className="btn text-white fw-bold px-3 py-2"
           style={{ backgroundColor: "#2D3161" }}
           onClick={abrirCrear}
         >
@@ -126,15 +132,16 @@ function GestionUsuarios() {
       </div>
 
       {mostrarFormulario && (
-        <div className="card shadow-sm border-0 rounded-4 p-4 mb-4 bg-white">
-          <h4 className="fw-bold mb-3" style={{ color: "#2D3161" }}>
-            {idEditando !== null ? "Editar Usuario" : "Agregar Nuevo Usuario"}
-          </h4>
+        <div className="card shadow-sm border-0 rounded-4 p-4 mb-4 bg-light">
+          <h5 className="fw-bold mb-3" style={{ color: "#2D3161" }}>
+            {idEditando !== null ? "Editar Usuario" : "Crear Nuevo Usuario"}
+          </h5>
+
           <form onSubmit={guardarUsuario}>
             <div className="row g-3">
-              <div className="col-12 col-md-5">
+              <div className="col-12 col-md-6">
                 <CampoFormulario
-                  etiqueta="Nombre Completo"
+                  etiqueta="Nombre"
                   tipo="text"
                   nombre="nombre"
                   valor={nombre}
@@ -142,30 +149,25 @@ function GestionUsuarios() {
                   alCambiar={setNombre}
                 />
               </div>
-              <div className="col-12 col-md-4">
+
+              <div className="col-12 col-md-6">
                 <CampoFormulario
-                  etiqueta="Correo Electronico"
+                  etiqueta="Correo electronico"
                   tipo="email"
                   nombre="correo"
                   valor={correo}
-                  placeholder="correo@ejemplo.com"
+                  placeholder="Ej: juan@correo.cl"
                   alCambiar={setCorreo}
                 />
               </div>
-              <div className="col-12 col-md-3">
-                <div className="mb-3">
-                  <label className="form-label fw-semibold">Rol</label>
-                  <input
-                    type="text"
-                    className="form-control bg-light"
-                    value={idEditando !== null ? (usuarios.find((u) => u.id === idEditando)?.rol || "Cliente") : "Cliente"}
-                    readOnly
-                  />
-                </div>
-              </div>
             </div>
-            <div className="d-flex gap-2 justify-content-end mt-4">
-              <button type="button" className="btn btn-secondary" onClick={cancelar}>
+
+            <div className="d-flex justify-content-end gap-2 mt-4">
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={cancelar}
+              >
                 Cancelar
               </button>
               <button
@@ -185,27 +187,31 @@ function GestionUsuarios() {
           <table className="table table-hover align-middle mb-0">
             <thead className="table-light">
               <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Rol</th>
-                <th className="text-center">Acciones</th>
+                <th scope="col" style={{ width: "80px" }}>ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Rol</th>
+                <th scope="col" className="text-center" style={{ width: "160px" }}>
+                  Acciones
+                </th>
               </tr>
             </thead>
             <tbody>
               {usuarios.map((u) => (
                 <tr key={u.id}>
-                  <td>{u.id}</td>
+                  <td className="fw-bold text-muted">{u.id}</td>
                   <td className="fw-semibold">{u.nombre}</td>
                   <td>{u.correo}</td>
                   <td>
-                    {u.rol === "Admin" ? (
-                      <span className="badge text-white" style={{ backgroundColor: "#2D3161" }}>
-                        Admin
-                      </span>
-                    ) : (
-                      <span className="badge bg-secondary">Cliente</span>
-                    )}
+                    <span
+                      className="badge"
+                      style={{
+                        backgroundColor: u.rol === "Admin" ? "#2D3161" : "#6c757d",
+                        color: "#fff"
+                      }}
+                    >
+                      {u.rol}
+                    </span>
                   </td>
                   <td className="text-center">
                     <button
@@ -215,24 +221,14 @@ function GestionUsuarios() {
                     >
                       Editar
                     </button>
-                    {u.rol === "Admin" ? (
-                      <button
-                        type="button"
-                        className="btn btn-sm btn-outline-danger"
-                        disabled
-                        title="El administrador no se puede eliminar"
-                      >
-                        Eliminar
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        className="btn btn-sm btn-outline-danger"
-                        onClick={() => eliminarUsuario(u)}
-                      >
-                        Eliminar
-                      </button>
-                    )}
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-outline-danger"
+                      disabled={u.rol === "Admin"}
+                      onClick={() => eliminarUsuario(u)}
+                    >
+                      Eliminar
+                    </button>
                   </td>
                 </tr>
               ))}
