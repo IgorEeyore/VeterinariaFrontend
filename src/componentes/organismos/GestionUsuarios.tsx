@@ -146,6 +146,7 @@ function GestionUsuarios() {
                   nombre="nombre"
                   valor={nombre}
                   placeholder="Ej: Juan Perez"
+                  obligatorio={true}
                   alCambiar={setNombre}
                 />
               </div>
@@ -157,6 +158,7 @@ function GestionUsuarios() {
                   nombre="correo"
                   valor={correo}
                   placeholder="Ej: juan@correo.cl"
+                  obligatorio={true}
                   alCambiar={setCorreo}
                 />
               </div>

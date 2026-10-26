@@ -135,6 +135,7 @@ function FormularioRegistro() {
                 nombre="nombre"
                 valor={nombre}
                 placeholder="Ej: Juan Perez"
+                obligatorio={true}
                 alCambiar={setNombre}
               />
 
@@ -144,6 +145,7 @@ function FormularioRegistro() {
                 nombre="rut"
                 valor={rut}
                 placeholder="Ej: 123456789"
+                obligatorio={true}
                 alCambiar={(val) => setRut(val.replace(/[^0-9kK]/g, "").slice(0, 9))}
               />
 
@@ -153,6 +155,7 @@ function FormularioRegistro() {
                 nombre="correo"
                 valor={correo}
                 placeholder="correo@ejemplo.cl"
+                obligatorio={true}
                 alCambiar={setCorreo}
               />
 
@@ -162,6 +165,7 @@ function FormularioRegistro() {
                 nombre="contrasena"
                 valor={contrasena}
                 placeholder="Ingresa entre 4 y 10 caracteres"
+                obligatorio={true}
                 alCambiar={(val) => setContrasena(val.slice(0, 10))}
               />
 

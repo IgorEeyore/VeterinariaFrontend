@@ -15,7 +15,7 @@ const serviciosIniciales: Servicio[] = [
   { id: 3, nombre: "Peluqueria Canina/Felina", categoria: "Servicio", precio: 18000 },
   { id: 4, nombre: "Desparasitacion Interna/Externa", categoria: "Medicamento", precio: 12000 },
   { id: 5, nombre: "Cirugia Menor", categoria: "Servicio", precio: 45000 },
-  { id: 6, nombre: "Corte de Uñas y Limpieza", categoria: "Servicio", precio: 8000 }
+  { id: 6, nombre: "Corte de Unas y Limpieza", categoria: "Servicio", precio: 8000 }
 ]
 
 function GestionCatalogo() {
@@ -139,12 +139,15 @@ function GestionCatalogo() {
                   nombre="nombre"
                   valor={nombre}
                   placeholder="Ej: Vacunacion felina"
+                  obligatorio={true}
                   alCambiar={setNombre}
                 />
               </div>
               <div className="col-12 col-md-4">
                 <div className="mb-3">
-                  <label className="form-label fw-semibold">Categoria</label>
+                  <label className="form-label fw-semibold">
+                    Categoria <span className="text-danger">(*)</span>
+                  </label>
                   <select
                     className="form-select"
                     value={categoria}
@@ -163,6 +166,7 @@ function GestionCatalogo() {
                   nombre="precio"
                   valor={precio}
                   placeholder="Ej: 15000"
+                  obligatorio={true}
                   alCambiar={setPrecio}
                 />
               </div>

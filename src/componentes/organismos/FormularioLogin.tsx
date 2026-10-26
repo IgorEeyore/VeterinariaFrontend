@@ -116,6 +116,7 @@ function FormularioLogin() {
                 nombre="correo"
                 valor={correo}
                 placeholder="ejemplo@demo.cl"
+                obligatorio={true}
                 alCambiar={setCorreo}
               />
 
@@ -125,6 +126,7 @@ function FormularioLogin() {
                 nombre="contrasena"
                 valor={contrasena}
                 placeholder="Ingresa tu contrasena (entre 4 y 10 caracteres)"
+                obligatorio={true}
                 alCambiar={(val) => setContrasena(val.slice(0, 10))}
               />
 

@@ -6,6 +6,7 @@ interface CampoFormularioProps {
   nombre: string
   valor: string
   placeholder?: string
+  obligatorio?: boolean
   alCambiar: (valor: string) => void
 }
 
@@ -15,11 +16,14 @@ function CampoFormulario({
   nombre,
   valor,
   placeholder,
+  obligatorio = false,
   alCambiar
 }: CampoFormularioProps) {
   return (
     <div className="mb-3">
-      <label className="form-label fw-semibold">{etiqueta}</label>
+      <label className="form-label fw-semibold">
+        {etiqueta} {obligatorio && <span className="text-danger">(*)</span>}
+      </label>
       <Input
         tipo={tipo}
         nombre={nombre}
