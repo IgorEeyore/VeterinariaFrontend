@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 function Footer() {
   return (
@@ -13,7 +13,7 @@ function Footer() {
           {/* Información general */}
           <div className="col-12 col-md-4">
             <h5 className="fw-bold">
-              🐾 Veterinaria San Marcos
+              Veterinaria San Marcos
             </h5>
 
             <p className="text-white-50">
@@ -127,7 +127,7 @@ function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer
