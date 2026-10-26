@@ -14,8 +14,19 @@ function Navbar() {
       className="py-3"
     >
       <Container className="d-flex flex-wrap gap-3">
-        <BootstrapNavbar.Brand as={Link} to="/">
-          🐾 Veterinaria San Marcos
+        <BootstrapNavbar.Brand as={Link} to="/" className="d-flex align-items-center gap-2">
+          <img
+            src="/img/logo.png"
+            alt="Logo Veterinaria San Marcos"
+            style={{
+              height: "42px",
+              backgroundColor: "#ffffff",
+              padding: "2px 8px",
+              borderRadius: "8px",
+              objectFit: "contain"
+            }}
+          />
+          <span className="fw-bold text-white">Veterinaria San Marcos</span>
         </BootstrapNavbar.Brand>
 
         <Nav className="ms-lg-auto flex-row flex-wrap align-items-center gap-2 gap-lg-3">
