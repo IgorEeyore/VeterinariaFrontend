@@ -30,6 +30,14 @@ function Navbar() {
         </BootstrapNavbar.Brand>
 
         <Nav className="ms-lg-auto flex-row flex-wrap align-items-center gap-2 gap-lg-3">
+          <Link
+            to="/agendar"
+            className="btn text-white fw-bold px-3 py-1 shadow-sm rounded-pill d-inline-flex align-items-center gap-1"
+            style={{ backgroundColor: "#2ec4b6" }}
+          >
+            📅 Agendar hora
+          </Link>
+
           <Nav.Link as={NavLink} to="/" end>
             Inicio
           </Nav.Link>
@@ -46,17 +54,22 @@ function Navbar() {
             Nosotros
           </Nav.Link>
 
-          <Nav.Link
-            as={NavLink}
+          <Link
             to="/carrito"
+            className="btn btn-light btn-sm d-inline-flex align-items-center justify-content-center shadow-sm"
+            style={{
+              width: "40px",
+              height: "36px",
+              borderRadius: "10px"
+            }}
             title="Ver carrito"
             aria-label="Ver carrito"
           >
             🛒
-          </Nav.Link>
+          </Link>
 
           <NavDropdown
-            title="👤 Cuenta"
+            title="Cuenta"
             id="menu-cuenta"
             align="end"
             menuVariant="light"
