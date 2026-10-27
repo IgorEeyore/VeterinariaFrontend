@@ -13,20 +13,12 @@ interface ItemCarrito {
 
 function ContenidoCarrito() {
   const [carrito, setCarrito] = useState<ItemCarrito[]>(() => {
-    try {
-      const guardado = localStorage.getItem("carritoSanMarcos")
-      if (guardado) {
-        return JSON.parse(guardado)
-      }
-    } catch {
-      return []
-    }
-    return []
+    const guardado = localStorage.getItem("carritoSanMarcos")
+    return guardado ? JSON.parse(guardado) : []
   })
 
   const eliminarItem = (indice: number) => {
-    const nuevoCarrito = [...carrito]
-    nuevoCarrito.splice(indice, 1)
+    const nuevoCarrito = carrito.filter((_item, posicion) => posicion !== indice)
     setCarrito(nuevoCarrito)
     localStorage.setItem("carritoSanMarcos", JSON.stringify(nuevoCarrito))
   }

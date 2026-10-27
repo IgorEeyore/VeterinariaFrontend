@@ -18,16 +18,8 @@ const formatoCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function GestionUsuarios() {
   const [usuarios, setUsuarios] = useState<Usuario[]>(() => {
-    try {
-      const datos = localStorage.getItem("usuariosSanMarcos")
-      if (datos) {
-        const parseados = JSON.parse(datos)
-        if (Array.isArray(parseados) && parseados.length > 0) return parseados
-      }
-    } catch {
-      return usuariosIniciales
-    }
-    return usuariosIniciales
+    const datos = localStorage.getItem("usuariosSanMarcos")
+    return datos ? JSON.parse(datos) : usuariosIniciales
   })
 
   const [nombre, setNombre] = useState("")

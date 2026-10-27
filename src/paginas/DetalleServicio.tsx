@@ -1,6 +1,16 @@
 import { useParams, Link } from "react-router-dom"
 
-export const listaServicios = [
+export interface Servicio {
+  id: number
+  nombre: string
+  precio: number
+  categoria: string
+  imagen?: string
+  descripcionCorta?: string
+  descripcionLarga?: string
+}
+
+export const listaServicios: Servicio[] = [
   {
     id: 1,
     nombre: "Consulta General",
@@ -25,8 +35,8 @@ export const listaServicios = [
     precio: 18000,
     categoria: "Servicio",
     imagen: "/img/peinado.jpg",
-    descripcionCorta: "Baño, corte de pelo y uñas.",
-    descripcionLarga: "Servicio estetico completo. Incluye baño con shampoo hipoalergenico, limpieza de glandulas anales y corte."
+    descripcionCorta: "Bano, corte de pelo y unas.",
+    descripcionLarga: "Servicio estetico completo. Incluye bano con shampoo hipoalergenico, limpieza de glandulas anales y corte."
   },
   {
     id: 4,
@@ -48,18 +58,30 @@ export const listaServicios = [
   },
   {
     id: 6,
-    nombre: "Corte de Uñas y Limpieza",
+    nombre: "Corte de Unas y Limpieza",
     precio: 8000,
     categoria: "Servicio",
     imagen: "/img/uñas.jpg",
     descripcionCorta: "Cuidado podologico y de almohadillas.",
-    descripcionLarga: "Corte seguro de uñas para evitar sobrecrecimiento y sangrado, junto con hidratacion de almohadillas plantares."
+    descripcionLarga: "Corte seguro de unas para evitar sobrecrecimiento y sangrado, junto con hidratacion de almohadillas plantares."
   }
 ]
 
 function DetalleServicio() {
   const { id } = useParams()
-  const servicio = listaServicios.find((s) => s.id === Number(id))
+  const guardados = localStorage.getItem("catalogoSanMarcos")
+  const catalogo: Servicio[] = guardados ? JSON.parse(guardados) : listaServicios
+  const itemGuardado = catalogo.find((s) => s.id === Number(id))
+  const itemOriginal = listaServicios.find((s) => s.id === Number(id))
+
+  const servicio = itemGuardado
+    ? {
+        ...itemGuardado,
+        imagen: itemGuardado.imagen || itemOriginal?.imagen || "",
+        descripcionCorta: itemGuardado.descripcionCorta || itemOriginal?.descripcionCorta || "",
+        descripcionLarga: itemGuardado.descripcionLarga || itemOriginal?.descripcionLarga || ""
+      }
+    : undefined
 
   const agregarAlCarrito = () => {
     if (!servicio) return
@@ -86,12 +108,21 @@ function DetalleServicio() {
       <div className="card shadow-sm border-0 rounded-4 p-4">
         <div className="row align-items-center g-4">
           <div className="col-12 col-md-6 text-center">
-            <img
-              src={servicio.imagen}
-              alt={servicio.nombre}
-              className="img-fluid rounded-4 shadow-sm w-100"
-              style={{ maxHeight: "350px", objectFit: "cover" }}
-            />
+            {servicio.imagen ? (
+              <img
+                src={servicio.imagen}
+                alt={servicio.nombre}
+                className="img-fluid rounded-4 shadow-sm w-100"
+                style={{ maxHeight: "350px", objectFit: "cover" }}
+              />
+            ) : (
+              <div
+                className="d-flex align-items-center justify-content-center bg-light text-muted fw-semibold rounded-4 shadow-sm w-100"
+                style={{ height: "280px" }}
+              >
+                Sin imagen
+              </div>
+            )}
           </div>
           <div className="col-12 col-md-6">
             <span className="badge text-white mb-2" style={{ backgroundColor: "#2ec4b6" }}>
@@ -103,8 +134,16 @@ function DetalleServicio() {
             <p className="fs-3 fw-bold text-success mb-3">
               ${servicio.precio.toLocaleString("es-CL")}
             </p>
-            <p className="lead text-muted mb-3">{servicio.descripcionCorta}</p>
-            <p className="mb-4">{servicio.descripcionLarga}</p>
+            {servicio.descripcionCorta && (
+              <p className="lead text-muted mb-3">{servicio.descripcionCorta}</p>
+            )}
+            {servicio.descripcionLarga ? (
+              <p className="mb-4">{servicio.descripcionLarga}</p>
+            ) : (
+              <p className="mb-4 text-secondary">
+                Atencion profesional y personalizada en Veterinaria San Marcos.
+              </p>
+            )}
             <div className="d-flex gap-3 flex-wrap">
               <button
                 type="button"

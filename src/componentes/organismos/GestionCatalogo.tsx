@@ -7,34 +7,79 @@ interface Servicio {
   nombre: string
   categoria: string
   precio: number
+  descripcionCorta?: string
+  descripcionLarga?: string
+  imagen?: string
 }
 
 const serviciosIniciales: Servicio[] = [
-  { id: 1, nombre: "Consulta General", categoria: "Servicio", precio: 15000 },
-  { id: 2, nombre: "Vacunacion Anual", categoria: "Servicio", precio: 25000 },
-  { id: 3, nombre: "Peluqueria Canina/Felina", categoria: "Servicio", precio: 18000 },
-  { id: 4, nombre: "Desparasitacion Interna/Externa", categoria: "Medicamento", precio: 12000 },
-  { id: 5, nombre: "Cirugia Menor", categoria: "Servicio", precio: 45000 },
-  { id: 6, nombre: "Corte de Unas y Limpieza", categoria: "Servicio", precio: 8000 }
+  {
+    id: 1,
+    nombre: "Consulta General",
+    categoria: "Servicio",
+    precio: 15000,
+    imagen: "/img/consulta1.jpg",
+    descripcionCorta: "Revision fisica completa para tu mascota.",
+    descripcionLarga: "La consulta general incluye una revision exhaustiva de los signos vitales, peso, temperatura, revision dental, ocular y de oidos."
+  },
+  {
+    id: 2,
+    nombre: "Vacunacion Anual",
+    categoria: "Servicio",
+    precio: 25000,
+    imagen: "/img/vacuna2.jpg",
+    descripcionCorta: "Esquema de vacunacion preventiva.",
+    descripcionLarga: "Protege a tu mascota contra las enfermedades mas comunes y peligrosas. Incluye la vacuna Octuple o Triple Felina."
+  },
+  {
+    id: 3,
+    nombre: "Peluqueria Canina/Felina",
+    categoria: "Servicio",
+    precio: 18000,
+    imagen: "/img/peinado.jpg",
+    descripcionCorta: "Bano, corte de pelo y unas.",
+    descripcionLarga: "Servicio estetico completo. Incluye bano con shampoo hipoalergenico, limpieza de glandulas anales y corte."
+  },
+  {
+    id: 4,
+    nombre: "Desparasitacion Interna/Externa",
+    categoria: "Medicamento",
+    precio: 12000,
+    imagen: "/img/vacuna.jpg",
+    descripcionCorta: "Tratamiento contra parasitos y pulgas.",
+    descripcionLarga: "Control integral de parasitos gastrointestinales y ectoparasitos como pulgas y garrapatas con farmacos certificados."
+  },
+  {
+    id: 5,
+    nombre: "Cirugia Menor",
+    categoria: "Servicio",
+    precio: 45000,
+    imagen: "/img/consulta.jpg",
+    descripcionCorta: "Intervenciones quirurgicas programadas.",
+    descripcionLarga: "Procedimientos como esterilizacion, castracion o suturas menores con anestesia monitoreada y cuidados postoperatorios."
+  },
+  {
+    id: 6,
+    nombre: "Corte de Unas y Limpieza",
+    categoria: "Servicio",
+    precio: 8000,
+    imagen: "/img/unas.jpg",
+    descripcionCorta: "Cuidado podologico y de almohadillas.",
+    descripcionLarga: "Corte seguro de unas para evitar sobrecrecimiento y sangrado, junto con hidratacion de almohadillas plantares."
+  }
 ]
 
 function GestionCatalogo() {
   const [servicios, setServicios] = useState<Servicio[]>(() => {
-    try {
-      const datos = localStorage.getItem("catalogoSanMarcos")
-      if (datos) {
-        const parseados = JSON.parse(datos)
-        if (Array.isArray(parseados) && parseados.length > 0) return parseados
-      }
-    } catch {
-      return serviciosIniciales
-    }
-    return serviciosIniciales
+    const datos = localStorage.getItem("catalogoSanMarcos")
+    return datos ? JSON.parse(datos) : serviciosIniciales
   })
 
   const [nombre, setNombre] = useState("")
   const [categoria, setCategoria] = useState("Servicio")
   const [precio, setPrecio] = useState("")
+  const [descripcionCorta, setDescripcionCorta] = useState("")
+  const [descripcionLarga, setDescripcionLarga] = useState("")
   const [idEditando, setIdEditando] = useState<number | null>(null)
   const [mostrarFormulario, setMostrarFormulario] = useState(false)
 
@@ -48,6 +93,8 @@ function GestionCatalogo() {
     setNombre("")
     setCategoria("Servicio")
     setPrecio("")
+    setDescripcionCorta("")
+    setDescripcionLarga("")
     setMostrarFormulario(true)
   }
 
@@ -56,6 +103,8 @@ function GestionCatalogo() {
     setNombre(item.nombre)
     setCategoria(item.categoria)
     setPrecio(String(item.precio))
+    setDescripcionCorta(item.descripcionCorta || "")
+    setDescripcionLarga(item.descripcionLarga || "")
     setMostrarFormulario(true)
   }
 
@@ -64,6 +113,8 @@ function GestionCatalogo() {
     setIdEditando(null)
     setNombre("")
     setPrecio("")
+    setDescripcionCorta("")
+    setDescripcionLarga("")
   }
 
   const guardarServicio = (e: FormEvent<HTMLFormElement>) => {
@@ -85,7 +136,14 @@ function GestionCatalogo() {
     if (idEditando !== null) {
       const actualizados = servicios.map((s) =>
         s.id === idEditando
-          ? { ...s, nombre: nombreLimpio, categoria, precio: precioNumero }
+          ? {
+              ...s,
+              nombre: nombreLimpio,
+              categoria,
+              precio: precioNumero,
+              descripcionCorta: descripcionCorta.trim(),
+              descripcionLarga: descripcionLarga.trim()
+            }
           : s
       )
       guardarCambios(actualizados)
@@ -96,7 +154,9 @@ function GestionCatalogo() {
         id: nuevoId,
         nombre: nombreLimpio,
         categoria,
-        precio: precioNumero
+        precio: precioNumero,
+        descripcionCorta: descripcionCorta.trim(),
+        descripcionLarga: descripcionLarga.trim()
       }
       guardarCambios([...servicios, nuevoServicio])
       alert("Servicio creado con exito.")
@@ -171,6 +231,32 @@ function GestionCatalogo() {
                 />
               </div>
             </div>
+
+            <div className="row g-3">
+              <div className="col-12 col-md-6">
+                <CampoFormulario
+                  etiqueta="Descripcion Corta"
+                  tipo="text"
+                  nombre="descripcionCorta"
+                  valor={descripcionCorta}
+                  placeholder="Ej: Revision completa para tu mascota"
+                  alCambiar={setDescripcionCorta}
+                />
+              </div>
+              <div className="col-12 col-md-6 mb-3">
+                <label className="form-label fw-semibold">
+                  Descripcion Detallada
+                </label>
+                <textarea
+                  className="form-control"
+                  rows={2}
+                  placeholder="Detalla lo que incluye el servicio o producto..."
+                  value={descripcionLarga}
+                  onChange={(e) => setDescripcionLarga(e.target.value)}
+                />
+              </div>
+            </div>
+
             <div className="d-flex gap-2 justify-content-end mt-4">
               <button type="button" className="btn btn-secondary" onClick={cancelar}>
                 Cancelar
