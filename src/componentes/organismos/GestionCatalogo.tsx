@@ -63,7 +63,7 @@ const serviciosIniciales: Servicio[] = [
     nombre: "Corte de Unas y Limpieza",
     categoria: "Servicio",
     precio: 8000,
-    imagen: "/img/unas.jpg",
+    imagen: "/img/uñas.jpg",
     descripcionCorta: "Cuidado podologico y de almohadillas.",
     descripcionLarga: "Corte seguro de unas para evitar sobrecrecimiento y sangrado, junto con hidratacion de almohadillas plantares."
   }

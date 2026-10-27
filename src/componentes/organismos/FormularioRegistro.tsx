@@ -22,7 +22,7 @@ const formatoRut = /^[0-9]{7,8}[0-9kK]$/
 const validarRut = (rut: string): boolean => {
   const valor = rut.replace(/\./g, "").replace(/-/g, "")
   const cuerpo = valor.slice(0, -1)
-  let dv = valor.slice(-1).toUpperCase()
+  const dv = valor.slice(-1).toUpperCase()
 
   if (cuerpo.length < 7 || cuerpo.length > 8) return false
 
