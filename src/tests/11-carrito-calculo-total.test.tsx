@@ -16,8 +16,8 @@ test("Prueba 11: mostrar total del carrito", () => {
         onPagar={() => {}}
       />
     </MemoryRouter>
-  );
+  )
 
   expect(screen.getByText("2")).toBeDefined();
   expect(screen.getByText("$35.000")).toBeDefined();
-});
+})
