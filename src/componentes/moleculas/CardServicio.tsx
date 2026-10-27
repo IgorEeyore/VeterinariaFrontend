@@ -6,7 +6,7 @@ interface CardServicioProps {
   categoria: string
   precio: number
   descripcionCorta: string
-  imagen: string
+  imagen?: string
   onAgregarCarrito?: (id: number) => void
 }
 
@@ -21,12 +21,21 @@ function CardServicio({
 }: CardServicioProps) {
   return (
     <div className="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
-      <img
-        src={imagen}
-        className="card-img-top"
-        alt={nombre}
-        style={{ height: "200px", objectFit: "cover" }}
-      />
+      {imagen ? (
+        <img
+          src={imagen}
+          className="card-img-top"
+          alt={nombre}
+          style={{ height: "200px", objectFit: "cover" }}
+        />
+      ) : (
+        <div
+          className="d-flex align-items-center justify-content-center bg-light text-muted fw-semibold"
+          style={{ height: "200px" }}
+        >
+          Sin imagen
+        </div>
+      )}
       <div className="card-body d-flex flex-column p-3">
         <div className="d-flex justify-content-between align-items-center mb-2">
           <span className="badge text-white" style={{ backgroundColor: "#2ec4b6" }}>
