@@ -8,6 +8,7 @@ interface UsuarioRegistrado {
   nombre: string
   correo: string
   rol: "Admin" | "Cliente"
+  contrasena?: string
 }
 
 const usuariosIniciales: UsuarioRegistrado[] = [
@@ -42,53 +43,34 @@ function FormularioLogin() {
       return
     }
 
-    let usuarios: UsuarioRegistrado[] = usuariosIniciales
-    try {
-      const guardados = localStorage.getItem("usuariosSanMarcos")
-      if (guardados) {
-        const parseados = JSON.parse(guardados)
-        if (Array.isArray(parseados) && parseados.length > 0) {
-          usuarios = parseados
-        }
-      }
-    } catch {
-      usuarios = usuariosIniciales
-    }
+    const guardados = localStorage.getItem("usuariosSanMarcos")
+    const usuarios: UsuarioRegistrado[] = guardados ? JSON.parse(guardados) : usuariosIniciales
 
     const correoLimpio = correo.trim().toLowerCase()
     const usuarioEncontrado = usuarios.find(
       (u) => u.correo.toLowerCase() === correoLimpio
     )
 
+    let usuarioValido: UsuarioRegistrado | null = null
+
     if (correoLimpio === "admin@demo.cl" && contrasena === "1234") {
-      localStorage.setItem(
-        "usuarioActivo",
-        JSON.stringify({ nombre: "Admin", correo: "admin@demo.cl", rol: "Admin" })
-      )
-      navigate("/admin")
+      usuarioValido = { id: 1, nombre: "Admin", correo: "admin@demo.cl", rol: "Admin" }
+    } else if (correoLimpio === "user@demo.cl" && contrasena === "5678") {
+      usuarioValido = { id: 2, nombre: "Usuario", correo: "user@demo.cl", rol: "Cliente" }
+    } else if (
+      usuarioEncontrado &&
+      (!usuarioEncontrado.contrasena || usuarioEncontrado.contrasena === contrasena.trim())
+    ) {
+      usuarioValido = usuarioEncontrado
+    }
+
+    if (!usuarioValido) {
+      setError("Correo o contrasena incorrectos")
       return
     }
 
-    if (correoLimpio === "user@demo.cl" && contrasena === "5678") {
-      localStorage.setItem(
-        "usuarioActivo",
-        JSON.stringify({ nombre: "Usuario", correo: "user@demo.cl", rol: "Cliente" })
-      )
-      navigate("/")
-      return
-    }
-
-    if (usuarioEncontrado) {
-      localStorage.setItem("usuarioActivo", JSON.stringify(usuarioEncontrado))
-      if (usuarioEncontrado.rol === "Admin") {
-        navigate("/admin")
-      } else {
-        navigate("/")
-      }
-      return
-    }
-
-    setError("Correo o contrasena incorrectos")
+    localStorage.setItem("usuarioActivo", JSON.stringify(usuarioValido))
+    navigate(usuarioValido.rol === "Admin" ? "/admin" : "/")
   }
 
   return (
