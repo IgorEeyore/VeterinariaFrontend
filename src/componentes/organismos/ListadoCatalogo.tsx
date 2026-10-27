@@ -7,42 +7,28 @@ interface Servicio {
   nombre: string
   categoria: string
   precio: number
-  imagen: string
-  descripcionCorta: string
-  descripcionLarga: string
-}
-
-interface ItemStorage {
-  id: number
-  nombre: string
-  categoria: string
-  precio: number
+  imagen?: string
+  descripcionCorta?: string
+  descripcionLarga?: string
 }
 
 const obtenerServicios = (): Servicio[] => {
-  try {
-    const guardados = localStorage.getItem("catalogoSanMarcos")
-    if (guardados) {
-      const parseados = JSON.parse(guardados)
-      if (Array.isArray(parseados) && parseados.length > 0) {
-        return parseados.map((item: ItemStorage) => {
-          const original = listaServicios.find((s) => s.id === item.id)
-          return {
-            id: item.id,
-            nombre: item.nombre,
-            categoria: item.categoria,
-            precio: Number(item.precio),
-            imagen: original ? original.imagen : "/img/consulta.jpg",
-            descripcionCorta: original ? original.descripcionCorta : "Servicio profesional para tu mascota.",
-            descripcionLarga: original ? original.descripcionLarga : "Atencion y cuidado veterinario especializado."
-          }
-        })
-      }
+  const guardados = localStorage.getItem("catalogoSanMarcos")
+  if (!guardados) return listaServicios
+
+  const parseados: Servicio[] = JSON.parse(guardados)
+  return parseados.map((item) => {
+    const original = listaServicios.find((s) => s.id === item.id)
+    return {
+      id: item.id,
+      nombre: item.nombre,
+      categoria: item.categoria,
+      precio: Number(item.precio),
+      imagen: item.imagen || original?.imagen || "",
+      descripcionCorta: item.descripcionCorta || original?.descripcionCorta || "Servicio profesional para tu mascota.",
+      descripcionLarga: item.descripcionLarga || original?.descripcionLarga || "Atencion y cuidado veterinario especializado."
     }
-  } catch {
-    return listaServicios
-  }
-  return listaServicios
+  })
 }
 
 function ListadoCatalogo() {
@@ -64,9 +50,10 @@ function ListadoCatalogo() {
   )
 
   const serviciosFiltrados = servicios.filter((servicio) => {
+    const textoCorta = servicio.descripcionCorta || ""
     const coincideTexto =
       servicio.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
-      servicio.descripcionCorta.toLowerCase().includes(busqueda.toLowerCase())
+      textoCorta.toLowerCase().includes(busqueda.toLowerCase())
     const coincideCategoria =
       categoria === "Todos" || servicio.categoria === categoria
     return coincideTexto && coincideCategoria
@@ -123,7 +110,7 @@ function ListadoCatalogo() {
                 nombre={servicio.nombre}
                 categoria={servicio.categoria}
                 precio={servicio.precio}
-                descripcionCorta={servicio.descripcionCorta}
+                descripcionCorta={servicio.descripcionCorta || ""}
                 imagen={servicio.imagen}
                 onAgregarCarrito={agregarAlCarrito}
               />
