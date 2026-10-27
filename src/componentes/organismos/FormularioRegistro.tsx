@@ -8,6 +8,7 @@ interface Usuario {
   nombre: string
   correo: string
   rol: "Admin" | "Cliente"
+  contrasena?: string
 }
 
 const usuariosIniciales: Usuario[] = [
@@ -100,7 +101,8 @@ function FormularioRegistro() {
       id: nuevoId,
       nombre: nombre.trim(),
       correo: correo.trim().toLowerCase(),
-      rol: "Cliente"
+      rol: "Cliente",
+      contrasena: contrasena.trim()
     }
 
     const nuevaLista = [...usuarios, nuevoUsuario]
